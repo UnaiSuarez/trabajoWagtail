@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% load wagtailcore_tags %} {% block body_class %}template-blogindexpage{% endblock %} {% block content %}
+<div class="container">
+    <h1>{{ page.title }}</h1>
+    <hr>
+    <p><a href="?decada=90">Década de los 90</a></p>
+    <p><a href="?genero=drama">Drama</a></p>
+    <hr>
+    <ul class="list-group">
+        {% for peli in peliculas %}
+        <li class="list-group-item">{{peli.title}}</li>
+
+        {% empty %}
+        <p>No hay posts todavía ... </p>
+        {% endfor %}
+    </ul>
+
+    {% if peliculas.paginator.count > 1 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% include "includes/pagination.html" with subpages=peliculas %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
